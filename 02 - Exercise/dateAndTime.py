@@ -1,13 +1,16 @@
 #Date and Time Exercise
 import os
 import datetime as dt
+import pytz
 
 os.system('cls')
 
 #Header
-today = dt.date.today()
+today = dt.datetime.now()
+gmt = pytz.timezone('Asia/Jakarta')
+timezone = dt.datetime.now(gmt)
 title = 'how old are you?'
-print(f"{today:%A, %y-%m-%d (%I:%M:%S %p) %Z}")
+print(f"{today:%A, %y-%m-%d (%I:%M:%S %p)} {timezone:%Z %z}")
 print(5*"=",title.title(),5*"=")
 
 #Input Data
@@ -17,7 +20,6 @@ place = str(input('Place     : '))
 date  = int(input('Date      : '))
 month = int(input('Month     : '))
 year  = int(input('Year      : '))
-birth_date = dt.date(year,month,date)
 print(28*"=")
 
 #Greetings
@@ -50,6 +52,7 @@ else:
     greetings()
 
 #Calculation Process
+birth_date = dt.datetime(year,month,date)
 age = today - birth_date
 age_year = age.days // 365
 age_month = (age.days % 365) // 30
